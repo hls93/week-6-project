@@ -1,13 +1,16 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const routes = require('./routes/routes');
-const highlightJS = require('highlight.js');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 mongoose.Promise = bluebird;
 
+const createRoutes = require('./routes/createRoutes');
+const loginRoutes = require('./routes/loginForm');
+
+const User = require('./models/login');
+const Snippet = require('./models/snippet')
 
 // create express app
 const app = express();
@@ -37,12 +40,52 @@ app.use((req, res, next) => {
   console.log(req.session);
   next();
 });
-// use my routes
-app.use('/', routes);
+// use my routes========================================
+app.get('/search', (req, res) => {
+  res.render('search')
+})
+// app.get('/create', (req, res) => {
+//   res.render('create')
+// })
+app.use('/', loginRoutes);
+app.use('/addSnippet', createRoutes);
+
+//render home page =============================================================
+const requireLogin = (req, res, next) => {
+  console.log('req.user', req.user);
+  if (req.user) {
+    next();
+  } else {
+    console.log('Not logged in, redirecting...')
+    res.redirect('/login');
+  }
+};
+
+app.get('/', requireLogin, function(req, res) {
+
+    Snippet.find()
+      .then((snippet) => {
+        res.render('home', {user: req.user, snippet: snippet})
+      })
+      .catch(err => res.send('nope'))
+});
+
+//remove==============================
+
+app.get('/deleteSnippet', (req, res) => {
+  Snippet.findById(req.query.id)
+    .remove()
+    // then redirect to the homepage
+    .then(() => res.redirect('/'));
+});
+
+//logout========================================================================
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/login');
+});
 
 mongoose
   // connect to mongo via mongoose
   .connect('mongodb://localhost:27017/newdb', { useMongoClient: true })
-  // now we can do whatever we want with mongoose.
-  // configure session support middleware with express-session
   .then(() => app.listen(3000, () => console.log('ready to roll!!')));

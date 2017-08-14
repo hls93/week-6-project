@@ -19,14 +19,17 @@
   </ul>
 
    <section>
-     <form class="form" action='/login/auth' method="post">
+     <form class="form" action='/login' method="post">
 
-         <input type="text" name="userName" value="" placeholder="Username">
+         <input type="text" name="username" value="" placeholder="Username">
 
          <input type="text" name="password" value="" placeholder="Password">
 
        <button type="submit" name="button">Login</button>
+
+       <a class="signup" href="/signup">Register</a>
      </form>
+
 
       <div class="errors">
         {{invalid}}

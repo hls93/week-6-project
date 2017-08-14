@@ -68,3 +68,39 @@ header{
 #notes{
   height: 100px;
 }
+
+.signup{
+  justify-content: center;
+  align-items: center;
+}
+
+.search{
+  font-family: 'Josefin Sans', sans-serif;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2E8B57;
+}
+
+.search form{
+  padding: 10px;
+}
+
+.search form input{
+width: 200px;
+}
+
+.search form button{
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  border: solid #006400;
+  background-color: #2E8B57;
+  border-radius: 10px;
+}
+
+.search table{
+  width: 500px;
+  border: solid #006400;
+}
