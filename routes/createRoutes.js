@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 const User = require('../models/login');
-const Snippet = require('../models/snippet')
+const Snippet = require('../models/snippets')
 const flash = require('express-flash-messages');
 const bodyParser = require('body-parser');
 
@@ -12,13 +12,11 @@ routes.use(bodyParser.urlencoded({extended: false}));
 
 //search page===================================================================
 routes.get('/search', (req, res) => {
-  let search = req.query.mySnippets
+  let search = req.query.searches;
 
-  // Snippet.find([{'language': search}, {tags: search}])
-  // .then(snippets => res.render('search', {snippet: snippet}))
-  // .catch(err => res.send('can not find'))
-  res.render('search')
-  // console.log('search');
+  Snippet.find({$or: [{language: search}, {tags: search}]})
+  .then(snippets => res.render('search', {snippets: snippets}))
+  .catch(err =>res.send('nope'))
 });
 
 //create========================================
@@ -26,13 +24,12 @@ routes.get('/create', (req, res) => {
   if (req.query.id) {
     Snippet.findById(req.query.id)
 
-      .then(snippet => res.render('create', {
-        snippet: snippet
+      .then(snippets => res.render('create', {
+        snippets: snippets
       }));
   } else {
     res.render('create');
   }
-  // res.render('create', {user: req.user})
 })
 
 routes.post('/new', (req, res) => {
@@ -49,17 +46,10 @@ routes.post('/new', (req, res) => {
         console.log(err.errors);
         res.render('create', {
           errors: err.errors,
-          snippet: req.body
+          snippets: req.body
         })
       })
   }
-  // let snippet = new Snippet(req.body)
-  // snippet.provider = 'local';
-  //
-  // snippet
-  //   .save()
-  //   .then(() => res.redirect('/'))
-  //   .catch(err => console.log(err))
 });
 
 

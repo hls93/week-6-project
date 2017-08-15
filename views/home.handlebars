@@ -19,6 +19,7 @@
     <a href="/addSnippet/create">Create a snippet</a>
   </header>
 
+
   <table border="1">
     <tr>
       <th>Title</th>
@@ -27,16 +28,17 @@
       <th>Body</th>
       <th>Notes</th>
     </tr>
-    {{#snippet}}
+    {{#snippets}}
       <tr>
-        <td><a href="/search/{{title}}">{{title}}</a></td>
+        <td><a href="/addSnippet/create?id={{_id}}">{{title}}</a></td>
         <td>{{language}}</td>
         <td>{{tags}}</td>
         <td>{{body}}</td>
         <td>{{notes}}</td>
         <td><a href="/deleteSnippet/?id={{_id}}">X</a></td>
       </tr>
-    {{/snippet}}
+    {{/snippets}}
+
 
   </table>
 

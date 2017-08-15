@@ -104,3 +104,7 @@ width: 200px;
   width: 500px;
   border: solid #006400;
 }
+
+.search table th{
+  font-family: 'Josefin Sans', sans-serif;
+}

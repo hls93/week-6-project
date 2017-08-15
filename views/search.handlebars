@@ -18,10 +18,11 @@
 
     <h2>Snippets</h2>
 
-    <form action="/search/userresults" method="post">
-      <input type="text" name="search" value="" placeholder="Search by language or tag">
+    <form action="/search" method="get">
+      <input type="text" class="searches" name="searches" value="" placeholder="Search by language or tag">
       <button>Search</button>
     </form>
+
 
     <table border="1">
       <tr>
@@ -31,16 +32,15 @@
         <th>Body</th>
         <th>Notes</th>
       </tr>
-      {{#snippet}}
+      {{#snippets}}
         <tr>
-          <td><a href="/search/{{title}}">{{title}}</a></td>
+          <td><a href="snippets/addSnippet?id={{_id}}">{{title}}</a></td>
           <td>{{language}}</td>
           <td>{{tags}}</td>
           <td>{{body}}</td>
           <td>{{notes}}</td>
-          <td><a href="/deleteSnippet/?id={{_id}}">X</a></td>
         </tr>
-      {{/snippet}}
+      {{/snippets}}
 
     </table>
   </div>

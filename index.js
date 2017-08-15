@@ -10,7 +10,7 @@ const createRoutes = require('./routes/createRoutes');
 const loginRoutes = require('./routes/loginForm');
 
 const User = require('./models/login');
-const Snippet = require('./models/snippet')
+const Snippet = require('./models/snippets')
 
 // create express app
 const app = express();
@@ -64,8 +64,8 @@ const requireLogin = (req, res, next) => {
 app.get('/', requireLogin, function(req, res) {
 
     Snippet.find()
-      .then((snippet) => {
-        res.render('home', {user: req.user, snippet: snippet})
+      .then((snippets) => {
+        res.render('home', {user: req.user, snippets: snippets})
       })
       .catch(err => res.send('nope'))
 });
