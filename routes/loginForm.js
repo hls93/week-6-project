@@ -26,6 +26,14 @@ routes.use(flash());
 routes.use(bodyParser.json());
 routes.use(bodyParser.urlencoded({extended: false}));
 
+// const requireLogin = (req, res, next) => {
+//   if (req.user) {
+//     next();
+//   } else {
+//     res.redirect('/login');
+//   }
+// };
+
 // configure passport
 passport.use(
   new LocalStrategy(function(username, password, done) {

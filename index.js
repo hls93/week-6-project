@@ -37,12 +37,7 @@ app.use(
 
 let url = 'mongodb://localhost:27017/newdb';
 
-app.use((req, res, next) => {
-  if (!req.session.users)
-    req.session.users = []
-  console.log(req.session);
-  next();
-});
+
 // use my routes========================================
 
 // app.get('/create', (req, res) => {
@@ -53,7 +48,6 @@ app.use('/addSnippet', createRoutes);
 
 //render home page =============================================================
 const requireLogin = (req, res, next) => {
-  console.log('req.user', req.user);
   if (req.user) {
     next();
   } else {
