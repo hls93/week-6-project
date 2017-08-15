@@ -18,8 +18,8 @@
 
     <h2>Snippets</h2>
 
-    <form class="search" action="/search" method="get">
-      <input type="text" class="searches" name="searches" value="" placeholder="Search by language or tag">
+    <form class="search" action="/addSnippet/search" method="get">
+      <input type="text" class="searches" name="mySearch"  placeholder="Search by language or tag">
       <button>Search</button>
     </form>
 
@@ -34,7 +34,7 @@
       </tr>
       {{#snippets}}
         <tr>
-          <td><a href="add/searches/add?id={{_id}}">{{title}}</a></td>
+          <td><a href="/addSnippet/create?id={{_id}}">{{title}}</a></td>
           <td>{{language}}</td>
           <td>{{tags}}</td>
           <td>{{body}}</td>

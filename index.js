@@ -35,6 +35,8 @@ app.use(
   })
 );
 
+let url = 'mongodb://localhost:27017/newdb';
+
 app.use((req, res, next) => {
   if (!req.session.users)
     req.session.users = []

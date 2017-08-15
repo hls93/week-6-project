@@ -12,7 +12,7 @@ routes.use(bodyParser.urlencoded({extended: false}));
 
 //search page===================================================================
 routes.get('/search', (req, res) => {
-  let search = req.query.searches;
+  let search = req.query.mySearch;
 
   Snippet.find({$or: [{language: search}, {tags: search}]})
   .then(snippets => res.render('search', {snippets: snippets}))
