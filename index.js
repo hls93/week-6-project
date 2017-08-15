@@ -1,3 +1,4 @@
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -41,9 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 // use my routes========================================
-app.get('/search', (req, res) => {
-  res.render('search')
-})
+
 // app.get('/create', (req, res) => {
 //   res.render('create')
 // })
